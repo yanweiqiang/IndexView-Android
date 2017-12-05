@@ -1,4 +1,4 @@
 # IndexView-Android
 Android index view.
 
-![image](https://github.com/yanweiqiang/IndexView-Android/edit/master/IndexView.gif)
+![image](https://github.com/yanweiqiang/IndexView-Android/blob/master/IndexView.gif)
