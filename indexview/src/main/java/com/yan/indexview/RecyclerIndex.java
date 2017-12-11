@@ -112,22 +112,17 @@ public class RecyclerIndex<T> {
         }
         RecyclerView.ViewHolder nextViewHolder = recyclerView.getChildViewHolder(nextView);
 
-        /*
-         * A bux not fix, if app killed background by system, the indexHolder view cannot recreate in time,
-         * you must swipe the RecyclerView until an title view appear on the top of it.
-         */
         if (indexView == null) {
-            if (viewHolder instanceof IViewHolder) {
-                IViewHolder<T> temp = (IViewHolder<T>) adapter.onCreateViewHolder((ViewGroup) viewAttachment.getRoot(), INDEX);
-                indexView = temp.getView();
-                indexView.setOnClickListener(onClickListener);
-                viewAttachment.changeChild(indexView);
-                indexHolder = temp;
-                indexHolder.display(getDataList().get(position));
-            }
-
-            if (indexView == null) {
-                return;
+            IViewHolder<T> temp = (IViewHolder<T>) adapter.onCreateViewHolder((ViewGroup) viewAttachment.getRoot(), INDEX);
+            indexView = temp.getView();
+            indexView.setOnClickListener(onClickListener);
+            viewAttachment.changeChild(indexView);
+            indexHolder = temp;
+            for (int i = position; i >= 0; i--) {
+                if (getDataList().get(i) instanceof IIndex) {
+                    indexHolder.display(getDataList().get(i));
+                    break;
+                }
             }
         }
 
